@@ -30,7 +30,8 @@ ext {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	compile group: 'javax.mail', name: 'mail', version: '1.4.1'
+	compile 'javax.mail:mail:1.4.1'
+	compile 'org.projectlombok:lombok'
 }
 
 dependencyManagement {
