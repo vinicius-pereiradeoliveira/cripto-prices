@@ -37,11 +37,13 @@ public class PriceService {
 	public String initMonitoringOfPrice(double alertPrice, String id) {
 		System.out.println("===> Monitoring price <===");
 		List<PricesCryptoOutput> info = Arrays.asList(pricesRestClient.getCryptoInformation(id).getBody());
-		info.forEach(item->{
-			if(Double.parseDouble(item.getPrice_usd()) > alertPrice) {
-				alertUser(Double.parseDouble(item.getPrice_usd()), id);
-			}
-		});
+
+		info.stream()
+				.map(PricesCryptoOutput::getPrice_usd)
+				.map(Double::parseDouble)
+				.filter(item -> item > alertPrice)
+				.forEach(item -> alertUser(item, id));
+
 		return info.toString();
 	}
 
